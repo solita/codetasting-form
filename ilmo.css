@@ -1,0 +1,59 @@
+body{
+background: #000000;
+font-family: courier;
+}
+
+.container {
+margin: 50px auto;
+height: 650px;
+width: 950px;
+position:relative;
+border:1px solid #fefefe;
+overflow:hidden;
+}
+
+#input {
+width: 910px;
+display:inline-block;
+position:relative;
+float:left;
+}
+
+.bottom {
+position:absolute;
+bottom:5px;
+width: 100%;
+}
+
+.label {
+width: 30px;
+position: relative;
+left: 15px;
+top:5px;
+color: #fefefe;
+float:left;
+}
+
+.console {
+position:absolute;
+bottom:32px;
+/* overflow:hidden; */
+}
+
+.white{
+color: #fefefe;
+}
+
+.blue{
+color: #81bbd5;
+}
+
+.line {
+margin-left: 15px;
+margin-bottom:2px;
+}
+
+.margin {
+margin-left: 40px;
+margin-bottom:2px;
+}

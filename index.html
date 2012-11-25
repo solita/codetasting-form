@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<link href="ilmo.css" type="text/css" rel="stylesheet">
+<link href="cssConsole.css" type="text/css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="cssConsole.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35431188-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<title>Solita Tasting - Raspberry</title>
+</head>
+<body>
+	<div class="container">
+		<div class="console">
+			<div class="line white">
+				<pre style="font: 12px/6px monospace;">
+		@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		@@@@@'::::;#@@@@@@@#':::'#@@@@@@+#@@@@@@@@@@+@@@+++++++++++@@@@@'''#@@@@@@@
+		@@@;::::::::@@@@@+:::::::::#@@@@::+@@@@@@@@@::@@:::::::::::@@@@+::::@@@@@@@
+		@@;::+@@@@@@@@@@':::'###':::+@@@::'@@@@@@@@@::@@@@@@;::@@@@@@@@::+::@@@@@@@
+		@@::+@@@@@@@@@@#::;@@@@@@@:::@@@::'@@@@@@@@@::@@@@@@;::@@@@@@@#::@::'@@@@@@
+		@@::+@@@@@@@@@@:::@@@@@@@@@::;@@::'@@@@@@@@@::@@@@@@;::@@@@@@@::'@+::@@@@@@
+		@@:::#@@@@@@@@@::'@@@@@@@@@;::@@::'@@@@@@@@@::@@@@@@;::@@@@@@@::@@@::+@@@@@
+		@@@::::;+@@@@@@::#@@@@@@@@@+::@@::'@@@@@@@@@::@@@@@@;::@@@@@@;:;@@@;::@@@@@
+		@@@@;::::::+@@#::@@@@@@@@@@#::@@::'@@@@@@@@@::@@@@@@;::@@@@@@::#@@@@::#@@@@
+		@@@@@@@+::::;@@::#@@@@@@@@@+::@@::'@@@@@@@@@::@@@@@@;::@@@@@'::@@@@@:::@@@@
+		@@@@@@@@@@;::@@::+@@@@@@@@@'::@@::'@@@@@@@@@::@@@@@@;::@@@@@::+@@@@@#::@@@@
+		@@@@@@@@@@@::#@:::@@@@@@@@@:::@@::'@@@@@@@@@::@@@@@@;::@@@@+::@@@@@@@::;@@@
+		@@@@@@@@@@@::@@+::+@@@@@@@'::#@@::'@@@@@@@@@::@@@@@@;::@@@@::;@@@@@@@'::@@@
+		@@+;#@@@@#:::@@@;::;@@@@#;::;@@@::'@@@@@@@@@::@@@@@@;::@@@#::@@@@@@@@@::'@@
+		@#::::::::::@@@@@;:::::::::;@@@@:::::::::;@@::@@@@@@;::@@@;::@@@@@@@@@;::@@
+		@@@'::::::+@@@@@@@@;:::::;@@@@@@::::::::::@@::@@@@@@;::@@@;;@@@@@@@@@@@;:#@
+		@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		</pre>
+		<div class="line white">&nbsp;</div>
+				<div class="line white">Solita Code Tasting - Raspberry</div>
+				<div class="line white">&nbsp;</div>
+				<div class="line white">Kiinnostaako tulevaisuuden webbiratkaisut? Niin meitäkin, tule mukaamme koodaamaan. </div>
+				<div class="line white">Valitsemme 15 parasta koodausiltaamme. Osallistujille illan devausalustat mukaan.</div>
+			    <div class="line white">&nbsp;</div>
+				<div class="line white">Ilta järjestetään tiistaina 4.12.2012 Solitan uudella Helsingin toimistolla aivan</div>
+				<div class="line white">Kampin ytimessä Kiasman, Lasipalatsin ja Eduskuntatalon naapurissa, osoitteessa </div>
+				<div class="line white">Arkadiankatu 2. Tapahtuma alkaa klo 16.30 ja kestää n. klo 21 asti</div>
+				<div class="line">&nbsp;</div>
+			    <div class="line white">Ilmoittauduthan 18.11 mennssä. Lisätietoa tapahtumasta saat komennolla "man codetasting",</div>
+			    <div class="line white">tai suoraan emailitse niko.kurtti at solita.fi</div>
+				<div class="line">&nbsp;</div>
+				<div class="line">&nbsp;</div>
+				<div class="line white">Ilmoittaudu mukaan tapahtumaan lisäämällä itsesi käyttäjäksi adduser -komennolla.</div>
+				<div class="line white"> Apua saat komennolla help. Mikäli haluat päästä takaisin päävalikkoon, paina ctrl+c</div>
+				<div class="line">&nbsp;</div>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="label">></div>
+			<div id="input"></div>
+                <form name="ilmo" action="ilmo.py" method="POST">
+		            <input type="hidden" name="name">
+	 	            <input type="hidden" name="background">
+				    <input type="hidden" name="allergies">
+				    <input type="hidden" name="email">
+				    <input type="hidden" name="objectives">
+				    <input type="hidden" name="phone">
+		   </form>
+		</div>
+	</div>  
+	
+<script>
+
+var lineLimit = 28;
+var focus;
+//form values
+var name;
+var background;
+var objectives;
+var allergies;
+var email;
+
+
+var ctrlDown = false;
+var ctrlKey = 17, cKey = 67;
+
+
+$(document).keydown(function(e) {
+	if(e.keyCode == ctrlKey) ctrlDown = true;
+}).keyup(function(e) {
+	if(e.keyCode == ctrlKey) ctrlDown = false;
+});
+
+$(document).keydown(function(e) {
+	if(ctrlDown && e.keyCode == cKey) {
+		addLine("> " + $('#input').find('input').val());
+		$('#input').cssConsole('reset');
+		execCommand = mainMenu.main;
+	}
+});
+
+// hook to form submit() event
+$(document.forms["ilmo"]).submit(function (event) {
+    event.preventDefault();
+
+    var form = $(this);
+
+    var req = apiSendForm(form.serialize());
+});
+
+function apiSendForm(data) {
+    return $.ajax({
+        type: 'POST',
+        url: '/cgi-bin/ilmo.py',
+        data: data
+    });
+}    
+
+$('#input').cssConsole({
+	inputName:'console',
+	charLimit: 100,
+	onEnter: function(){
+		addLine("> "+$('#input').find('input').val());
+		if ( !$('#input').find('input').val()) {
+		return;
+		}
+		execCommand($('#input').find('input').val());
+		$('#input').cssConsole('reset');	
+	}
+});
+
+focus = window.setInterval(function() {
+	if(!$('#input').find('input').is(":focus")){
+		$('#input').find('input').focus();
+	}
+}, 100);
+
+function addLine(input, style, color) {
+		if($('.console div').length==lineLimit) {
+			$('.console div').eq(0).remove();
+		}
+		var escapedInput = $('<div/>').text(input).html();
+		style = typeof style !== 'undefined' ? style : 'line';
+		color = typeof color !== 'undefined' ? color : 'white';
+
+		$('.console').append('<div class="'+style+' '+color+'">'+escapedInput+'</div>');
+}
+
+function addEmptyLine() {
+		if($('.console div').length==lineLimit) {
+			$('.console div').eq(0).remove();
+		}
+
+		$('.console').append('<div>&nbsp</div>');
+}
+
+var readEmail = {
+    ask: function () {
+        addLine("Syötä sähköpostiosoitteesi");
+        execCommand = readEmail.check;
+    },
+    check: function (emailInput) {
+        if (emailInput.indexOf("@") != -1) {
+        email = emailInput;
+        readPhone.ask();
+ 	   } else {
+    	addLine("Antamasi osoite ei ollut validi!");
+  	   }
+    }
+};
+
+var readPhone = {
+    ask: function () {
+        addLine("Syötä puhelinnumerosi (huom. käytämme tätä vain tämän tapahtuman tarpeisiin!)");
+        execCommand = readPhone.check;
+    },
+    check: function (phoneInput) {
+    	var filter = /^[0-9-+]+$/;
+        if (filter.test(phoneInput)) {
+        phone = phoneInput;
+        readAllergies.ask();
+ 	   } else {
+    	addLine("Antamasi numero ei ollut validi!");
+  	   }
+    }
+};
+
+var readAllergies = {
+    ask: function () {
+        addLine("Mikäli sinulla on allergioita/muita erityisruokavalioita niin kerro ne tässä");
+        execCommand = readAllergies.check;
+    },
+    check: function (allergiesInput) {
+        allergies = allergiesInput;
+        readBackground.ask();
+    }
+};
+
+var readBackground = {
+    ask: function () {
+       addLine("Millä tasolla koodaamisesi on? Kerro lyhyesti opiskelu/työhistoriasi, harrasteprojektit jne. ");
+       execCommand = readBackground.check;
+    },
+    check: function (backgroundInput) {
+        background = backgroundInput;
+        readObjectives.ask();
+    }
+};
+
+var readObjectives = {
+    ask: function () {
+       addLine("Miksi haluat koodata? Mitkä ovat tavoitteesi ohjelmoinnin parissa?");
+       execCommand = readObjectives.check;
+    },
+    check: function (objectivesInput) {
+        objectives = objectivesInput;
+         confirmation.ask();
+    }
+};
+
+
+var confirmation = {
+    ask: function () {
+        addLine("Annoit seuraavat tiedot:")
+		addLine("Nimi: '" + name + "'", 'margin');
+		addLine("Tausta: '" + background + "'", 'margin');
+		addLine("Tavoitteet: '" + objectives + "'", 'margin');
+		addLine("Email: '" + email + "'", 'margin');
+		addLine("Puhelinnumero: '" + phone + "'", 'margin');
+		addLine("Allergiat: '" + allergies + "'", 'margin');
+		addLine("Haluatko lähettää tiedot ? K[ylla]/E[i]");
+                execCommand = confirmation.check;
+    },
+    check: function (confirmationInput) {
+         if (confirmationInput.indexOf("K") != -1  || confirmationInput.indexOf("k") != -1)
+		    {
+		    	addLine("Tiedot lähetetty!");
+		        $('input[name=name]').val(name);
+				$('input[name=background]').val(background);
+				$('input[name=email]').val(email);
+				$('input[name=phone]').val(phone);
+				$('input[name=allergies]').val(allergies);
+				$('input[name=objectives]').val(objectives);
+				$(document.forms["ilmo"]).submit();
+		    } else {
+		    	addLine("Tietoja ei lähetetty");
+		    } 
+		  execCommand = mainMenu.main;
+    }
+};
+
+
+
+var mainMenu = {
+   main: function(mainMenuInput){
+  
+	var command = mainMenuInput.split(" ")[ 0 ];
+	if (mainMenuInput.split(" ").length > 2 ) {
+	var parameter = mainMenuInput.substr(mainMenuInput.indexOf(" ") + 1);
+	}
+	else {
+		var parameter =  mainMenuInput.split(" ")[ 1 ];
+	}
+    if ( commands[command] ) {
+      return commands[command](parameter);
+    } else {
+      addLine("Command '" + command + "' was not found.");
+    }  
+    } 
+};
+
+var execCommand = mainMenu.main;
+
+var commands = {
+	help: function (){
+		addLine("Järjestelmä tunnistaa seuraavat komennot:");
+		addLine("adduser etunimi sukunimi ", 'margin');
+		addLine("man adduser", 'margin');
+		addLine("man solita", 'margin');
+		addLine("man codetasting", 'margin');
+		addLine("help", 'margin');
+	},
+	man: function (parameter){
+
+	if ( !parameter) {
+		addLine("What manual page do you want?");
+	}	else {
+		    if (parameter.indexOf("adduser") != -1) { 
+				addLine("Komento adduser ottaa parametrit <etunimi> <sukunimi>");
+			}
+			else if (parameter.indexOf("codetasting") != -1) {
+				addLine("Tarjoamme viidelletoista potentiaalisimmalle uudelle kyvylle mahdollisuuden tutustua toimintaamme ja ihmisiimme leppoisan koodausillan parissa. Ilta järjestetään Solitan Helsingin toimistolla 4.12.2012, osoitteessa Arkadiankatu 2. Osallistujille tarjotaan tiedon lisäksi ruokaa, että juomaa. Illan osallistujat saavat käytetyt devausalustat omakseen.");
+				addEmptyLine();
+				addLine("Illan aihepiiri pyörii pienten ohjelmointipulmien parissa joita suoritetaan pariohjelmointina. Teknologioita on useita joten opittavaa varmasti on kaikille eikä esitietoja vaadita.");
+            			addEmptyLine();
+				addLine("Ilmoittautumisaikaa on kaksi viikkoa. Ilmoittautumista varten kysymme nimesi, yhteystiedot (ainoastaan käytettäväksi tätä tapahtumaa varten), tarjoilua varten allergiasi, sekä sekalaisen setin lyhyitä kysymyksiä, jotka vaikuttavat valintaasi. Vakuuta meidät.");
+				addEmptyLine();
+				addLine("Ilmoitamme valituista osallistujista maanantaina 19.11.2012. Lisätietoja itse tapahtumasta voit tiedustella suoraan emailitse niko.kurtti at solita.fi.");
+				addEmptyLine();
+				
+			} else if (parameter.indexOf("solita") != -1) {
+				addLine("Teemme töitä Suomen parhaimmille ja vaativimmille asiakkaille. Yli 15 vuoden kokemus ohjelmistoalalta, tänään aitiopaikalla luomassa digitaalista yhteiskuntaa.");
+				addEmptyLine();
+				addLine("Our cup of tea:");
+				addLine("*Java");
+				addLine("*.NET");
+				addLine("*Clojure");
+				addLine("*HTML5");
+				addLine("*And many others..");
+				addEmptyLine();
+                                addLine("www.solita.fi");
+ 				addEmptyLine();
+			} else {
+				addLine("No manual entry for '" + parameter + "'");
+			}
+		}
+	},
+	adduser: function(parameter){
+		if ( parameter && parameter.split(" ").length > 1) {
+		addLine("Adding user '" + parameter + "'");
+		name = parameter;
+		readEmail.ask();
+		//label.style.display ="hidden";
+		} else {
+			addLine("Komento adduser ottaa parametrit <etunimi> <sukunimi>");
+		}
+	}
+}
+</script>
+  
+</body>
+</html>
