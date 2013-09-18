@@ -5,33 +5,33 @@
 		$(element).find('.cssConsoleDisplay span').removeClass("selected");
 		clearInterval(element.cursor);
 		if(element.cursor_position!=$(element).find('.cssConsoleDisplay span').length) {
-			$(element).find('.cssConsoleCursor').css({ visibility: 'hidden' }); 
+			$(element).find('.cssConsoleCursor').css({ visibility: 'hidden' });
 			$(element).find('.cssConsoleDisplay span').eq(element.cursor_position).addClass('selected');
 			  element.cursor = window.setInterval(function() {
 			  if ($(element).find('.cssConsoleDisplay span').eq(element.cursor_position).hasClass('selected')) {
 				$(element).find('.cssConsoleDisplay span').eq(element.cursor_position).removeClass('selected');
 			  } else {
 				$(element).find('.cssConsoleDisplay span').eq(element.cursor_position).addClass('selected');
-			  }  
+			  }
 			  }, blinkingInterval);
 		} else {
-			$(element).find('.cssConsoleCursor').css({ visibility: 'visible' }); 
+			$(element).find('.cssConsoleCursor').css({ visibility: 'visible' });
 			  element.cursor = window.setInterval(function() {
 			  if ($(element).find('.cssConsoleCursor').css('visibility') === 'visible') {
 				$(element).find('.cssConsoleCursor').css({ visibility: 'hidden' });
 			  } else {
-				$(element).find('.cssConsoleCursor').css({ visibility: 'visible' });  
-			  }  
+				$(element).find('.cssConsoleCursor').css({ visibility: 'visible' });
+			  }
 			  }, blinkingInterval);
 		}
 		return element;
 	}
-	
+
 
   var methods = {
     init : function( options ) {
-	 
-	// Default settings 
+
+	// Default settings
 	 var settings = $.extend( {
       type : 'text',
 	  inputId : null,
@@ -40,7 +40,7 @@
 	  blinkingInterval: 500,
 	  charLimit : 0,
 	  preventEnter : true,
-	  onEnter: function (){ } 
+	  onEnter: function (){ }
     }, options);
 
        return this.each(function(){
@@ -49,7 +49,7 @@
 			root.cursor;
 			root.cursor_position=0;
 			root.inputVal='';
-			
+
 			// Creating additional html elements
 			$this.addClass('cssConsole');
 			$this.append('<span class="cssConsoleDisplay"></span>');
@@ -76,12 +76,12 @@
 				$this.find('.cssConsoleInput').val(settings.inputValue);
 				root.inputVal=settings.inputValue;
 			}
-					
+
 			$this.on('click', function() {
 			   $this.find('.cssConsoleInput').focus();
 				updateCursor(root, settings.blinkingInterval);
-			});			
-			
+			});
+
 			$this.find('.cssConsoleInput').on('focus', function() {
 				updateCursor(root, settings.blinkingInterval);
 			});
@@ -93,13 +93,13 @@
 					$this.find('.cssConsoleDisplay span').removeClass("selected");
 				} else {
 					$this.find('.cssConsoleCursor').css({ visibility: 'hidden' });
-				}	
+				}
 
 			});
 
 			// Handles arrow keys, backspace, delete and enter keys
-			
-			$this.find('.cssConsoleInput').on('keydown', function(e) {  
+
+			$this.find('.cssConsoleInput').on('keydown', function(e) {
 					if(e.which==8) {
 						//backspace
 						if(root.cursor_position>0){
@@ -113,7 +113,7 @@
 						if(settings.preventEnter) {
 							e.preventDefault();
 						}
-						//Function that will execute on keydown Enter if set 
+						//Function that will execute on keydown Enter if set
 						settings.onEnter();
 					} else if(e.which==46) {
 						//delete
@@ -143,7 +143,7 @@
 						updateCursor(root, settings.blinkingInterval);
 					}
 			});
-			  
+
 			// Adding characters to cssConsoleDisplay on keyup
 			$this.find('.cssConsoleInput').on('keyup', function(e) {
 				//prevent backspace and delete
@@ -176,11 +176,11 @@
 					}
 				}
 			});
-		
-			return this;		
+
+			return this;
        });
     },
-	
+
 	// Destroy cssConsole
     destroy : function( ) {
        return this.each(function(){
@@ -194,7 +194,7 @@
 				return this;
        });
     },
-	
+
 	// Reseting input
 	reset : function( ) {
        return this.each(function(){
@@ -203,7 +203,7 @@
 				root.cursor_position=0;
 				if(root.cursor_position!=$this.find('.cssConsoleDisplay span').length) {
 					$this.find('.cssConsoleDisplay span').removeClass("selected");
-				} 
+				}
 				$this.find('.cssConsoleInput').val('');
 				root.inputVal='';
 				if($this.find('.cssConsoleInput').is(":focus")) {
@@ -217,7 +217,7 @@
 				return this;
        });
     }
-	
+
   };
 
   $.fn.cssConsole = function( method ) {
@@ -228,8 +228,8 @@
       return methods.init.apply( this, arguments );
     } else {
       $.error( 'Method ' +  method + ' does not exist on jQuery.cssConsole' );
-    }    
-  
+    }
+
   };
 
 })( jQuery );

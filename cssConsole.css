@@ -11,7 +11,7 @@ cursor:text;
 }
 
 .cssConsoleDisplay {
-float: left; 
+float: left;
 padding-left: 3px;
 white-space: pre;
 }
@@ -20,9 +20,9 @@ white-space: pre;
 position:absolute;
 left:0px;
 top:-30px;
-opacity: 0; 
+opacity: 0;
 filter:alpha(opacity=0);
-} 
+}
 
 .cssConsoleCursor {
 float: left;
@@ -33,17 +33,17 @@ margin:0;
 padding:0;
 padding-right:1px;
 padding-left:1px;
-visibility: hidden; 
+visibility: hidden;
 }
 
 .cssConsoleDisplay span.selected {
 background: #21f838;
-color: black;	
+color: black;
 }
 
 .cssConsoleDisplay span {
 background: black;
-color: #21f838;	
+color: #21f838;
 margin:0;
 padding:0;
 padding-right:1px;

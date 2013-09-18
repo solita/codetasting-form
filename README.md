@@ -1,4 +1,4 @@
-# Solita Code Tasting - registering 
+# Solita Code Tasting - registering
 
 This js thingie was used to collect applications from students to come code with us in a open Coding Dojo. Nothing fancy, a terminal emulator frontend with a simple python cgi to save the participants info and inform him/her that the application was received.
 

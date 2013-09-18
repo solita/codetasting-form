@@ -21,9 +21,9 @@ var email;
     {
         if (ctrlDown && e.keyCode == cKey){
         	addLine("> "+$('#input').find('input').val());
-        	$('#input').cssConsole('reset');	
+        	$('#input').cssConsole('reset');
 			execCommand = mainMenu.main;
-        } 
+        }
     });
 
 $('#input').cssConsole({
@@ -35,7 +35,7 @@ $('#input').cssConsole({
 		return;
 		}
 		execCommand($('#input').find('input').val());
-		$('#input').cssConsole('reset');	
+		$('#input').cssConsole('reset');
 	}
 });
 
@@ -111,7 +111,7 @@ var confirmation = {
 		    	//send spam
 		    } else {
 		    	addLine("Tietoja ei lähetetty");
-		    } 
+		    }
 		  execCommand = mainMenu.main;
     }
 };
@@ -120,7 +120,7 @@ var confirmation = {
 
 var mainMenu = {
    main: function(mainMenuInput){
-  
+
 	var command = mainMenuInput.split(" ")[ 0 ];
 	if (mainMenuInput.split(" ").length > 2 ) {
 	var parameter = mainMenuInput.substr(mainMenuInput.indexOf(" ") + 1);
@@ -132,8 +132,8 @@ var mainMenu = {
       return commands[command](parameter);
     } else {
       addLine("Command '" + command + "' was not found.");
-    }  
-    } 
+    }
+    }
 };
 
 var execCommand = mainMenu.main;
@@ -151,7 +151,7 @@ var commands = {
 	if ( !parameter) {
 		addLine("What manual page do you want?");
 	}	else {
-    if (parameter.indexOf("adduser") != -1) { 
+    if (parameter.indexOf("adduser") != -1) {
 		addLine("Komento adduser ottaa parametrit <etunimi> <sukunimi>");
 	} else if (parameter.indexOf("solita") != -1) {
 		//TODO: lisää kontentti
