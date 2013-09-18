@@ -1,0 +1,5 @@
+*.txt           eol=lf
+*.md            eol=lf
+*.js            eol=lf
+*.css           eol=lf
+*.html          eol=lf
