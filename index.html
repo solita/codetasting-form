@@ -22,7 +22,7 @@
         })();
 
     </script>
-    <title>Solita Tasting - Raspberry</title>
+    <title>Solita Dojo</title>
 </head>
 <body>
 <div class="container">
@@ -48,31 +48,14 @@
 		@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		</pre>
             <div class="line white">&nbsp;</div>
-            <div class="line white">Solita Code Tasting - Raspberry</div>
+            <div class="line white">Solita Dojo</div>
             <div class="line white">&nbsp;</div>
-            <div class="line white">Kiinnostaako tulevaisuuden webbiratkaisut? Niin meitäkin, tule mukaamme
-                koodaamaan.
-            </div>
-            <div class="line white">Valitsemme 15 parasta koodausiltaamme. Osallistujille illan devausalustat mukaan.
-            </div>
+            <div class="line white">TODO: what, when and where</div>
             <div class="line white">&nbsp;</div>
-            <div class="line white">Ilta järjestetään tiistaina 4.12.2012 Solitan uudella Helsingin toimistolla aivan
-            </div>
-            <div class="line white">Kampin ytimessä Kiasman, Lasipalatsin ja Eduskuntatalon naapurissa, osoitteessa
-            </div>
-            <div class="line white">Arkadiankatu 2. Tapahtuma alkaa klo 16.30 ja kestää n. klo 21 asti</div>
             <div class="line">&nbsp;</div>
-            <div class="line white">Ilmoittauduthan 18.11 mennssä. Lisätietoa tapahtumasta saat komennolla "man
-                codetasting",
-            </div>
-            <div class="line white">tai suoraan emailitse niko.kurtti at solita.fi</div>
+            <div class="line white">Registration using the `adduser` command.</div>
             <div class="line">&nbsp;</div>
-            <div class="line">&nbsp;</div>
-            <div class="line white">Ilmoittaudu mukaan tapahtumaan lisäämällä itsesi käyttäjäksi adduser -komennolla.
-            </div>
-            <div class="line white"> Apua saat komennolla help. Mikäli haluat päästä takaisin päävalikkoon, paina
-                ctrl+c
-            </div>
+            <div class="line white">See `help` for help. Return to main menu with `ctrl+c`.</div>
             <div class="line">&nbsp;</div>
         </div>
     </div>
@@ -81,11 +64,9 @@
         <div id="input"></div>
         <form name="ilmo" action="ilmo.py" method="POST">
             <input type="hidden" name="name">
-            <input type="hidden" name="background">
+            <input type="hidden" name="company">
             <input type="hidden" name="allergies">
             <input type="hidden" name="email">
-            <input type="hidden" name="objectives">
-            <input type="hidden" name="phone">
         </form>
     </div>
 </div>
@@ -96,8 +77,7 @@ var lineLimit = 28;
 var focus;
 //form values
 var name;
-var background;
-var objectives;
+var company;
 var allergies;
 var email;
 
@@ -181,64 +161,37 @@ function addEmptyLine() {
 
 var readEmail = {
     ask: function () {
-        addLine("Syötä sähköpostiosoitteesi");
+        addLine("What is your email address?");
         execCommand = readEmail.check;
     },
     check: function (emailInput) {
         if (emailInput.indexOf("@") != -1) {
             email = emailInput;
-            readPhone.ask();
+            readCompany.ask();
         } else {
-            addLine("Antamasi osoite ei ollut validi!");
+            addLine("Invalid email address!");
         }
     }
 };
 
-var readPhone = {
+var readCompany = {
     ask: function () {
-        addLine("Syötä puhelinnumerosi (huom. käytämme tätä vain tämän tapahtuman tarpeisiin!)");
-        execCommand = readPhone.check;
+        addLine("From which company do you come from?");
+        execCommand = readCompany.check;
     },
-    check: function (phoneInput) {
-        var filter = /^[0-9-+]+$/;
-        if (filter.test(phoneInput)) {
-            phone = phoneInput;
-            readAllergies.ask();
-        } else {
-            addLine("Antamasi numero ei ollut validi!");
-        }
+    check: function (companyInput) {
+        company = companyInput;
+        readAllergies.ask();
     }
 };
 
 var readAllergies = {
     ask: function () {
-        addLine("Mikäli sinulla on allergioita/muita erityisruokavalioita niin kerro ne tässä");
+        addLine("Do you have allergies or other special needs regarding food? What are they?");
         execCommand = readAllergies.check;
     },
     check: function (allergiesInput) {
         allergies = allergiesInput;
-        readBackground.ask();
-    }
-};
-
-var readBackground = {
-    ask: function () {
-        addLine("Millä tasolla koodaamisesi on? Kerro lyhyesti opiskelu/työhistoriasi, harrasteprojektit jne. ");
-        execCommand = readBackground.check;
-    },
-    check: function (backgroundInput) {
-        background = backgroundInput;
-        readObjectives.ask();
-    }
-};
-
-var readObjectives = {
-    ask: function () {
-        addLine("Miksi haluat koodata? Mitkä ovat tavoitteesi ohjelmoinnin parissa?");
-        execCommand = readObjectives.check;
-    },
-    check: function (objectivesInput) {
-        objectives = objectivesInput;
         confirmation.ask();
     }
 };
@@ -246,28 +199,24 @@ var readObjectives = {
 
 var confirmation = {
     ask: function () {
-        addLine("Annoit seuraavat tiedot:")
-        addLine("Nimi: '" + name + "'", 'margin');
-        addLine("Tausta: '" + background + "'", 'margin');
-        addLine("Tavoitteet: '" + objectives + "'", 'margin');
-        addLine("Email: '" + email + "'", 'margin');
-        addLine("Puhelinnumero: '" + phone + "'", 'margin');
-        addLine("Allergiat: '" + allergies + "'", 'margin');
-        addLine("Haluatko lähettää tiedot ? K[ylla]/E[i]");
+        addLine("You gave the following information:");
+        addLine("Name: " + name, 'margin');
+        addLine("Company: " + company, 'margin');
+        addLine("Email: " + email, 'margin');
+        addLine("Allergies: " + allergies, 'margin');
+        addLine("Register using this information? (Y/N)");
         execCommand = confirmation.check;
     },
     check: function (confirmationInput) {
-        if (confirmationInput.indexOf("K") != -1 || confirmationInput.indexOf("k") != -1) {
-            addLine("Tiedot lähetetty!");
+        if (confirmationInput.indexOf("Y") != -1 || confirmationInput.indexOf("y") != -1) {
             $('input[name=name]').val(name);
-            $('input[name=background]').val(background);
+            $('input[name=company]').val(company);
             $('input[name=email]').val(email);
-            $('input[name=phone]').val(phone);
             $('input[name=allergies]').val(allergies);
-            $('input[name=objectives]').val(objectives);
             $(document.forms["ilmo"]).submit();
+            addLine("Submitted! You will receive a confirmation email shortly.");
         } else {
-            addLine("Tietoja ei lähetetty");
+            addLine("Not submitted");
         }
         execCommand = mainMenu.main;
     }
@@ -280,8 +229,7 @@ var mainMenu = {
         var command = mainMenuInput.split(" ")[ 0 ];
         if (mainMenuInput.split(" ").length > 2) {
             parameter = mainMenuInput.substr(mainMenuInput.indexOf(" ") + 1);
-        }
-        else {
+        } else {
             parameter = mainMenuInput.split(" ")[ 1 ];
         }
         if (commands[command]) {
@@ -296,11 +244,10 @@ var execCommand = mainMenu.main;
 
 var commands = {
     help: function () {
-        addLine("Järjestelmä tunnistaa seuraavat komennot:");
-        addLine("adduser etunimi sukunimi ", 'margin');
+        addLine("The following commands are supported:");
+        addLine("adduser FIRSTNAME LASTNAME", 'margin');
         addLine("man adduser", 'margin');
         addLine("man solita", 'margin');
-        addLine("man codetasting", 'margin');
         addLine("help", 'margin');
     },
     man: function (parameter) {
@@ -309,27 +256,17 @@ var commands = {
             addLine("What manual page do you want?");
         } else {
             if (parameter.indexOf("adduser") != -1) {
-                addLine("Komento adduser ottaa parametrit <etunimi> <sukunimi>");
-            }
-            else if (parameter.indexOf("codetasting") != -1) {
-                addLine("Tarjoamme viidelletoista potentiaalisimmalle uudelle kyvylle mahdollisuuden tutustua toimintaamme ja ihmisiimme leppoisan koodausillan parissa. Ilta järjestetään Solitan Helsingin toimistolla 4.12.2012, osoitteessa Arkadiankatu 2. Osallistujille tarjotaan tiedon lisäksi ruokaa, että juomaa. Illan osallistujat saavat käytetyt devausalustat omakseen.");
-                addEmptyLine();
-                addLine("Illan aihepiiri pyörii pienten ohjelmointipulmien parissa joita suoritetaan pariohjelmointina. Teknologioita on useita joten opittavaa varmasti on kaikille eikä esitietoja vaadita.");
-                addEmptyLine();
-                addLine("Ilmoittautumisaikaa on kaksi viikkoa. Ilmoittautumista varten kysymme nimesi, yhteystiedot (ainoastaan käytettäväksi tätä tapahtumaa varten), tarjoilua varten allergiasi, sekä sekalaisen setin lyhyitä kysymyksiä, jotka vaikuttavat valintaasi. Vakuuta meidät.");
-                addEmptyLine();
-                addLine("Ilmoitamme valituista osallistujista maanantaina 19.11.2012. Lisätietoja itse tapahtumasta voit tiedustella suoraan emailitse niko.kurtti at solita.fi.");
-                addEmptyLine();
-
+                addLine("Registers a user to the event");
+                addLine("Usage: adduser FIRSTNAME LASTNAME");
             } else if (parameter.indexOf("solita") != -1) {
-                addLine("Teemme töitä Suomen parhaimmille ja vaativimmille asiakkaille. Yli 15 vuoden kokemus ohjelmistoalalta, tänään aitiopaikalla luomassa digitaalista yhteiskuntaa.");
+                addLine("We write code that runs the world around you (assuming you live in Finland)");
                 addEmptyLine();
                 addLine("Our cup of tea:");
-                addLine("*Java");
-                addLine("*.NET");
-                addLine("*Clojure");
-                addLine("*HTML5");
-                addLine("*And many others..");
+                addLine("* Java");
+                addLine("* .NET");
+                addLine("* Clojure");
+                addLine("* HTML5");
+                addLine("...and others");
                 addEmptyLine();
                 addLine("www.solita.fi");
                 addEmptyLine();
@@ -340,12 +277,11 @@ var commands = {
     },
     adduser: function (parameter) {
         if (parameter && parameter.split(" ").length > 1) {
-            addLine("Adding user '" + parameter + "'");
+            addLine("Adding user: " + parameter);
             name = parameter;
             readEmail.ask();
-            //label.style.display ="hidden";
         } else {
-            addLine("Komento adduser ottaa parametrit <etunimi> <sukunimi>");
+            this.man('adduser');
         }
     }
 }
