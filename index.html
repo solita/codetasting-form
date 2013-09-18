@@ -110,14 +110,20 @@ $(document.forms["ilmo"]).submit(function (event) {
 
     var form = $(this);
 
-    var req = apiSendForm(form.serialize());
+    apiSendForm(form.serialize(), function () {
+        addLine("Submitted! You will receive a confirmation email shortly.");
+    }, function () {
+        addLine("Error: could not submit, try again later");
+    });
 });
 
-function apiSendForm(data) {
+function apiSendForm(data, success, error) {
     return $.ajax({
         type: 'POST',
         url: '/cgi-bin/ilmo.py',
-        data: data
+        data: data,
+        success: success,
+        error: error
     });
 }
 
@@ -214,7 +220,6 @@ var confirmation = {
             $('input[name=email]').val(email);
             $('input[name=allergies]').val(allergies);
             $(document.forms["ilmo"]).submit();
-            addLine("Submitted! You will receive a confirmation email shortly.");
         } else {
             addLine("Not submitted");
         }
