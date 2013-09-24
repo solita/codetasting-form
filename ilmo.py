@@ -52,6 +52,7 @@ else:
         See you soon!
 
         - Solita Developers
+        http://dev.solita.fi
         """.format(**locals())).strip())
     msg['Subject'] = EMAIL_SUBJECT
     msg['To'] = email
