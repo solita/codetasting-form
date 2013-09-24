@@ -293,7 +293,11 @@ var commands = {
 
 $(function () {
     $.get('/cgi-bin/ilmo.py?stats=1', function (stats) {
-        addLine("Currently " + stats.registrations + " people have registered");
+        var n = stats.registrations;
+        var limit = stats.registrations_limit;
+        if (n >= limit) {
+            addLine("*** SORRY, THIS EVENT IS FULL; CANNOT REGISTER ***");
+        }
     }, 'json');
 });
 

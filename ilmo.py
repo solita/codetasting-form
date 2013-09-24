@@ -14,6 +14,7 @@ EMAIL_BCC = "send-a-copy-here@example.com"
 EMAIL_SUBJECT = "Solita Dojo registration received"
 
 REGISTRATIONS_FILE = '/tmp/path-to-ilmo.txt'
+REGISTRATIONS_LIMIT = 30
 
 form = cgi.FieldStorage()
 show_stats = form.getvalue('stats', '0') == '1'
@@ -23,7 +24,7 @@ print "Content-Type: text/plain;charset=utf-8\n"
 if show_stats:
     with  open(REGISTRATIONS_FILE, 'r') as f:
         lines = f.readlines()
-        print json.dumps({'registrations': len(lines)})
+        print json.dumps({'registrations': len(lines), 'registrations_limit': REGISTRATIONS_LIMIT})
 
 else:
     name = form.getvalue('name')
