@@ -5,6 +5,7 @@ import cgi
 import smtplib
 from time import gmtime, strftime
 import json
+import textwrap
 
 SMTP_SERVER = "mail1.sigmatic.fi"
 SMTP_PORT = 587
@@ -36,12 +37,22 @@ else:
     with open(REGISTRATIONS_FILE, 'a') as f:
         f.write(log_entry)
 
-    msg = MIMEText("Name: " + name + "\n" +
-                   "Company: " + company + "\n" +
-                   "Email: " + email + "\n" +
-                   "Allergies: " + allergies + "\n" +
-                   "\n" +
-                   "Thank you for registration. See you soon!\n\n - Solita Developers")
+    msg = MIMEText(textwrap.dedent(
+        """
+        You have registered to Solita Dojo which is to be held on Wednesday 23.10.2013 17:00
+        at Solita's office in Arkadiankatu 2, Helsinki.
+
+        If you want to change something regarding your registration, contact {EMAIL_BCC}
+
+        Name: {name}
+        Company: {company}
+        Email: {email}
+        Allergies: {allergies}
+
+        See you soon!
+
+        - Solita Developers
+        """.format(**locals())).strip())
     msg['Subject'] = EMAIL_SUBJECT
     msg['To'] = email
     msg['From'] = EMAIL_FROM
