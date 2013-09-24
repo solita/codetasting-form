@@ -6,14 +6,14 @@ import smtplib
 from time import gmtime, strftime
 import json
 
-SMTP_SERVER = "mail.example.com"
-SMTP_PORT = 25
+SMTP_SERVER = "mail1.sigmatic.fi"
+SMTP_PORT = 587
 
-EMAIL_FROM = "no-reply@example.com"
-EMAIL_BCC = "send-a-copy-here@example.com"
+EMAIL_FROM = "no-reply@solita.fi"
+EMAIL_BCC = "esko.luontola@solita.fi"
 EMAIL_SUBJECT = "Solita Dojo registration received"
 
-REGISTRATIONS_FILE = '/tmp/path-to-ilmo.txt'
+REGISTRATIONS_FILE = '/home/ilmo/dojo-ilmo.txt'
 REGISTRATIONS_LIMIT = 30
 
 form = cgi.FieldStorage()
