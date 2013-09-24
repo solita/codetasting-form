@@ -289,7 +289,14 @@ var commands = {
             this.man('adduser');
         }
     }
-}
+};
+
+$(function () {
+    $.get('/cgi-bin/ilmo.py?stats=1', function (stats) {
+        addLine("Currently " + stats.registrations + " people have registered");
+    }, 'json');
+});
+
 </script>
 
 </body>
