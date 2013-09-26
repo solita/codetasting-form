@@ -10,7 +10,7 @@ import textwrap
 SMTP_SERVER = "mail1.sigmatic.fi"
 SMTP_PORT = 587
 
-EMAIL_FROM = "esko.luontola@solita.fi"
+EMAIL_FROM = "dojo@solita.fi"
 EMAIL_BCC = EMAIL_FROM
 EMAIL_SUBJECT = "Solita Dojo registration received"
 
