@@ -12,7 +12,7 @@ SMTP_PORT = 587
 
 EMAIL_FROM = "dojo@solita.fi"
 EMAIL_BCC = EMAIL_FROM
-EMAIL_SUBJECT = "Solita Dojo registration received"
+EMAIL_SUBJECT = "Developer Garage registration received"
 
 REGISTRATIONS_FILE = '/home/ilmo/dojo-ilmo.txt'
 REGISTRATIONS_LIMIT = 30
@@ -39,10 +39,11 @@ else:
 
     msg = MIMEText(textwrap.dedent(
         """
-        You have registered to Solita Dojo which is to be held on Wednesday 23.10.2013 17:00
+        You have registered to Developer Garage which is to be held on Wednesday 5.3.2014 17:00
         at Solita's office in Arkadiankatu 2, Helsinki.
 
-        If you want to change something regarding your registration, contact {EMAIL_BCC}
+        If you want to change something regarding your registration, for example if you cannot make it,
+        please contact {EMAIL_BCC}
 
         Name: {name}
         Company: {company}
